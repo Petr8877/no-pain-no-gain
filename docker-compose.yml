@@ -1,0 +1,57 @@
+version: '3.5'
+services:
+  db:
+    build: postgresql
+    image: no-pain-no-gain_postgresql:1.0.0
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+    networks:
+      - no-pain-no-gain_ntwrk
+  pgadmin:
+    build: pgadmin
+    image: no-pain-no-gain_pgadmin:1.0.0
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "82:80"
+    networks:
+      - no-pain-no-gain_ntwrk
+  swagger-ui:
+    build: swagger-ui
+    image: no-pain-no-gain_swagger-ui:1.0.0
+    ports:
+      - "81:8080"
+    networks:
+      - no-pain-no-gain_ntwrk
+
+  product-service:
+    build: product-service
+    image: no-pain-no-gain_product-service:1.0.0
+    networks:
+      - no-pain-no-gain_ntwrk
+  user-service:
+    build: user-service
+    image: no-pain-no-gain_user-service:1.0.0
+    networks:
+      - no-pain-no-gain_ntwrk
+  mail-service:
+    build: mail-service
+    image: no-pain-no-gain_mail-service:1.0.0
+    networks:
+      - no-pain-no-gain_ntwrk
+
+  proxy:
+    build: proxy
+    image: no-pain-no-gain_proxy:1.0.0
+    ports:
+      - "80:80"
+    networks:
+      - no-pain-no-gain_ntwrk
+
+networks:
+  no-pain-no-gain_ntwrk:
+    name: no-pain-no-gain_ntwrk

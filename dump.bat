@@ -1,0 +1,1 @@
+docker save -o no-pain-no-gain.dump no-pain-no-gain_product-service:1.0.0 no-pain-no-gain_user-service:1.0.0 no-pain-no-gain_pgadmin:1.0.0 no-pain-no-gain_postgresql:1.0.0 no-pain-no-gain_proxy:1.0.0 no-pain-no-gain_swagger-ui:1.0.0
