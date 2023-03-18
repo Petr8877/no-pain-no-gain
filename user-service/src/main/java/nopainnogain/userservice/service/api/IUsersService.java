@@ -15,7 +15,7 @@ public interface IUsersService {
 
     SaveUserDto getUser(UUID id);
 
-    void updateUser(UUID id, LocalDateTime dtUpdate, UserDto userDTO);
+    User updateUser(UUID id, LocalDateTime dtUpdate, UserDto userDTO);
 
     PageDto<SaveUserDto> getUsersPage(Pageable pageable);
 }

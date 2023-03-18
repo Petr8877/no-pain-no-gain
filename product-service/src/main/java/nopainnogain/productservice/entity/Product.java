@@ -10,33 +10,25 @@ import java.util.UUID;
 
 @Entity
 @Table(schema = "app", name = "products")
-public class ProductEntity {
+public class Product {
 
     @Id
     private UUID uuid;
-
     private LocalDateTime dtCreate;
-
     @Version
     private LocalDateTime dtUpdate;
-
     private String title;
-
     private int weight;
-
     private int calories;
-
     private double proteins;
-
     private double fats;
-
     private double carbohydrates;
 
-    public ProductEntity() {
+    public Product() {
     }
 
-    public ProductEntity(UUID uuid, LocalDateTime dtCreate, LocalDateTime dtUpdate, String title, int weight,
-                         int calories, double proteins, double fats, double carbohydrates) {
+    public Product(UUID uuid, LocalDateTime dtCreate, LocalDateTime dtUpdate, String title, int weight,
+                   int calories, double proteins, double fats, double carbohydrates) {
         this.uuid = uuid;
         this.dtCreate = dtCreate;
         this.dtUpdate = dtUpdate;

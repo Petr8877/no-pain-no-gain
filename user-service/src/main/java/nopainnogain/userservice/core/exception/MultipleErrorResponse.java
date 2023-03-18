@@ -7,7 +7,6 @@ import java.util.List;
 public class MultipleErrorResponse extends RuntimeException {
 
     private String logref;
-
     private List<MyError> errors = new ArrayList<>();
 
     public String getLogref() {

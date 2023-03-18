@@ -1,17 +1,19 @@
 package nopainnogain.productservice.repository;
 
-import nopainnogain.productservice.entity.ProductEntity;
+import nopainnogain.productservice.entity.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
-public interface ProductRepository extends CrudRepository<ProductEntity, UUID> {
+@Repository
+public interface ProductRepository extends CrudRepository<Product, UUID> {
 
     boolean existsByTitle(String title);
 
-    @Query("select c from ProductEntity c")
-    Page<ProductEntity> findAllPage(Pageable pageable);
+    @Query("select c from Product c")
+    Page<Product> findAllPage(Pageable pageable);
 }

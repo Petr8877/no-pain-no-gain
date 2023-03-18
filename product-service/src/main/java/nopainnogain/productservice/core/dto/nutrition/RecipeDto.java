@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 import java.util.List;
 
-public record RecipeDto(@NotEmpty String title, @NotEmpty List<@Valid IngredientDto> composition) {
+public record RecipeDto(@NotEmpty String title,
+                        @NotEmpty List<@Valid IngredientDto> composition) {
 
 }

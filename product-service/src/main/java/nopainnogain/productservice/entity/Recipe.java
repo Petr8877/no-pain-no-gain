@@ -8,26 +8,22 @@ import java.util.UUID;
 
 @Entity
 @Table(schema = "app", name = "recipe")
-public class RecipeEntity {
+public class Recipe {
 
     @Id
     private UUID uuid;
-
     private LocalDateTime dtCreate;
-
     @Version
     private LocalDateTime dtUpdate;
-
     private String title;
-
     @ElementCollection
     @CollectionTable(schema = "app", name = "ingredient", joinColumns = @JoinColumn(name = "recipeId"))
-    private List<IngredientEntity> ingredients;
+    private List<Ingredient> ingredients;
 
-    public RecipeEntity() {
+    public Recipe() {
     }
 
-    public RecipeEntity(UUID uuid, LocalDateTime dtCreate, LocalDateTime dtUpdate, String title, List<IngredientEntity> ingredients) {
+    public Recipe(UUID uuid, LocalDateTime dtCreate, LocalDateTime dtUpdate, String title, List<Ingredient> ingredients) {
         this.uuid = uuid;
         this.dtCreate = dtCreate;
         this.dtUpdate = dtUpdate;
@@ -67,11 +63,11 @@ public class RecipeEntity {
         this.title = title;
     }
 
-    public List<IngredientEntity> getIngredients() {
+    public List<Ingredient> getIngredients() {
         return ingredients;
     }
 
-    public void setIngredients(List<IngredientEntity> ingredients) {
+    public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }
 }

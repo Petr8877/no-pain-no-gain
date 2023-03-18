@@ -1,9 +1,10 @@
 package nopainnogain.userservice.util.converter;
 
-import nopainnogain.userservice.core.dto.user.UserRegistrationDto;
+import nopainnogain.userservice.core.dto.user.RegistrationDto;
 import nopainnogain.userservice.entity.User;
 import nopainnogain.userservice.entity.Role;
 import nopainnogain.userservice.entity.Status;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -13,7 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Component
-public class RegistrationDtoToEntity implements Converter<UserRegistrationDto, User> {
+public class RegistrationDtoToEntity implements Converter<RegistrationDto, User> {
 
     private final PasswordEncoder encoder;
 
@@ -22,9 +23,15 @@ public class RegistrationDtoToEntity implements Converter<UserRegistrationDto, U
     }
 
     @Override
-    public User convert(UserRegistrationDto source) {
+    public User convert(RegistrationDto source) {
         LocalDateTime timeNow = LocalDateTime.now().truncatedTo(ChronoUnit.MILLIS);
-        return new User(UUID.randomUUID(), source.email(), source.fio(), encoder.encode(source.password()), timeNow, timeNow,
-                Role.USER, Status.WAITING_ACTIVATION);
+        return new User(UUID.randomUUID(),
+                        source.email(),
+                        source.fio(),
+                        encoder.encode(source.password()),
+                        timeNow,
+                        timeNow,
+                        Role.USER,
+                        Status.WAITING_ACTIVATION);
     }
 }

@@ -43,6 +43,12 @@ services:
     image: no-pain-no-gain_mail-service:1.0.0
     networks:
       - no-pain-no-gain_ntwrk
+  audit-service:
+    build: audit-service
+    image: no-pain-no-gain_audit-service:1.0.0
+    networks:
+      - no-pain-no-gain_ntwrk
+
 
   proxy:
     build: proxy

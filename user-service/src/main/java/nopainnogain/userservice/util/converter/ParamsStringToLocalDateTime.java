@@ -11,9 +11,6 @@ import java.util.TimeZone;
 public class ParamsStringToLocalDateTime implements Converter<String, LocalDateTime> {
     @Override
     public LocalDateTime convert(String source) {
-
-
-        return LocalDateTime.ofInstant(Instant.ofEpochMilli(Long.parseLong(source)),
-                TimeZone.getDefault().toZoneId());
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(Long.parseLong(source)), TimeZone.getDefault().toZoneId());
     }
 }

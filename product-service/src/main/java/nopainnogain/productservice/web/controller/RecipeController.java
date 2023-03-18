@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/recipe")
+@RequestMapping("/recipe")
 public class RecipeController {
 
     private final IRecipeService service;
@@ -35,7 +35,8 @@ public class RecipeController {
     }
 
     @PutMapping(path = "/{uuid}/dt_update/{dt_update}")
-    public void updateRecipe(@PathVariable("uuid") UUID uuid, @PathVariable("dt_update") LocalDateTime dtUpdate,
+    public void updateRecipe(@PathVariable("uuid") UUID uuid,
+                             @PathVariable("dt_update") LocalDateTime dtUpdate,
                              @RequestBody @Validated RecipeDto recipeDTO) {
         service.updateRecipe(uuid, dtUpdate, recipeDTO);
     }

@@ -10,11 +10,9 @@ public class SaveProductDto extends ProductDto {
 
     @NonNull
     private final UUID uuid;
-
     @NonNull
     @JsonProperty("dt_create")
     private final LocalDateTime dtCreate;
-
     @NonNull
     @JsonProperty("dt_update")
     private final long dtUpdate;

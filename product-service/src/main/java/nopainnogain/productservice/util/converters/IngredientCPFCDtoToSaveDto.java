@@ -9,7 +9,11 @@ import org.springframework.stereotype.Component;
 public class IngredientCPFCDtoToSaveDto implements Converter<IngredientCPFCDto, SaveIngredientDto> {
     @Override
     public SaveIngredientDto convert(IngredientCPFCDto source) {
-        return new SaveIngredientDto(source.product(), source.weight(), source.calories(), source.proteins(),
-                source.fats(), source.carbohydrates());
+        return new SaveIngredientDto(source.product(),
+                                     source.weight(),
+                                     source.calories(),
+                                     source.proteins(),
+                                     source.fats(),
+                                     source.carbohydrates());
     }
 }

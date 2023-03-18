@@ -13,9 +13,13 @@ public class UserEntityToSaveUserDto implements Converter<User, SaveUserDto> {
 
     @Override
     public SaveUserDto convert(User source) {
-        return new SaveUserDto(source.getUuid(), source.getDtCreate(),
-                ZonedDateTime.of(source.getDtUpdate(), ZoneId.systemDefault()).toInstant().toEpochMilli(), source.getEmail(), source.getFio(),
-                source.getRole(), source.getStatus());
+        return new SaveUserDto(source.getUuid(),
+                               source.getDtCreate(),
+                               ZonedDateTime.of(source.getDtUpdate(), ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                               source.getEmail(),
+                               source.getFio(),
+                               source.getRole(),
+                               source.getStatus());
     }
 
 }

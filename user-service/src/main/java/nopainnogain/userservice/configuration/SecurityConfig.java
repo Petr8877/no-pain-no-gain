@@ -29,12 +29,12 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests((auth) ->
                         auth
-                                .requestMatchers("/api/v1/users/registration").permitAll()
-                                .requestMatchers("/api/v1/users/verification").permitAll()
-                                .requestMatchers("/api/v1/users/login").permitAll()
-                                .requestMatchers("/api/v1/users/me").hasAnyAuthority("ADMIN", "USER")
-                                .requestMatchers("/api/v1/users/**").hasAuthority("ADMIN")
-                                .requestMatchers("/api/v1/users").hasAuthority("ADMIN")
+                                .requestMatchers("/users/registration").permitAll()
+                                .requestMatchers("/users/verification").permitAll()
+                                .requestMatchers("/users/login").permitAll()
+                                .requestMatchers("/users/me").hasAnyAuthority("ADMIN", "USER")
+                                .requestMatchers("/users/**").hasAuthority("ADMIN")
+                                .requestMatchers("/users").hasAuthority("ADMIN")
                                 .anyRequest()
                                 .authenticated()
                 )

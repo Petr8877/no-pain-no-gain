@@ -6,6 +6,7 @@ import nopainnogain.userservice.core.dto.user.UserDto;
 import nopainnogain.userservice.service.api.IUsersService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.lang.NonNull;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("/users")
 public class UsersController {
 
     private final IUsersService service;
@@ -35,12 +36,13 @@ public class UsersController {
     }
 
     @GetMapping(path = "/{id}")
-    public SaveUserDto getUserById(@PathVariable("id") UUID id) {
+    public SaveUserDto getUserById(@PathVariable("id") @NonNull UUID id) {
         return service.getUser(id);
     }
 
     @PutMapping(path = "/{id}/dt_update/{dt_update}")
-    public void updateUser(@PathVariable("id") UUID id,@PathVariable("dt_update") LocalDateTime dtUpdate,
+    public void updateUser(@PathVariable("id") @NonNull UUID id,
+                           @PathVariable("dt_update") @NonNull LocalDateTime dtUpdate,
                            @RequestBody @Validated UserDto userDTO) {
         service.updateUser(id, dtUpdate, userDTO);
     }

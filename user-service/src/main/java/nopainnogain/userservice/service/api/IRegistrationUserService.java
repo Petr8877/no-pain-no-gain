@@ -1,17 +1,16 @@
 package nopainnogain.userservice.service.api;
 
 
-import nopainnogain.userservice.core.dto.user.DetailsDto;
-import nopainnogain.userservice.core.dto.user.LoginDto;
-import nopainnogain.userservice.core.dto.user.SaveUserDto;
-import nopainnogain.userservice.core.dto.user.UserRegistrationDto;
+import nopainnogain.userservice.core.dto.user.*;
+import nopainnogain.userservice.entity.User;
 
 public interface IRegistrationUserService {
 
-    void registrationUser(UserRegistrationDto userRegistrationDTO);
+    User registrationUser(RegistrationDto userRegistrationDTO);
 
-    void verification(String code, String mail);
+    boolean verification(String code, String email);
 
+//    void verification(VerificationDto verificationDto);
     DetailsDto login(LoginDto loginDto);
 
     SaveUserDto aboutMe();

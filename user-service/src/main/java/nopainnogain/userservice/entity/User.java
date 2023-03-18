@@ -13,21 +13,15 @@ public class User {
 
     @Id
     private UUID uuid;
-
     private LocalDateTime dtCreate;
-
     @Version
     private LocalDateTime dtUpdate;
     private String email;
-
     private String fio;
-
     @JsonIgnore
     private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
-
     @Enumerated(EnumType.STRING)
     private Status status;
 

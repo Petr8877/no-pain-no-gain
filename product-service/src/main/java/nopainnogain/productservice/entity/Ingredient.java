@@ -7,24 +7,21 @@ import jakarta.persistence.Transient;
 import java.util.UUID;
 
 @Embeddable
-public class IngredientEntity {
+public class Ingredient {
 
     private UUID product;
-
     @ManyToOne
     @Transient
-    private ProductEntity productEntity;
-
+    private Product productEntity;
     private int weight;
-
     @ManyToOne
     @Transient
-    private RecipeEntity recipeEntity;
+    private Recipe recipeEntity;
 
-    public IngredientEntity() {
+    public Ingredient() {
     }
 
-    public IngredientEntity(UUID product, int weight) {
+    public Ingredient(UUID product, int weight) {
         this.product = product;
         this.weight = weight;
     }

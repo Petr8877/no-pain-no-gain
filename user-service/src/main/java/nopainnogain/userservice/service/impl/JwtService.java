@@ -43,16 +43,18 @@ public class JwtService {
                 .compact();
     }
 
-    public Map<String, Object> getClaim(DetailsDto user){
+    public Map<String, Object> getClaim(DetailsDto user) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("uuid", user.getUuid());
         claims.put("fio", user.getFio());
-        claims.put("date create",user.getDtCreate().toString());
+        claims.put("date create", user.getDtCreate().toString());
         claims.put("date update", String.valueOf(ZonedDateTime.of(user.getDtUpdate(), ZoneId.systemDefault()).toInstant().toEpochMilli()));
         claims.put("role", user.role());
         claims.put("status", user.getStatus());
         return claims;
     }
-    public boolean isTokenValid(String token, UserDetails userDetails){
+
+    public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }

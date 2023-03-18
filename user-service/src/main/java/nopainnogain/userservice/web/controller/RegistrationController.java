@@ -1,9 +1,9 @@
 package nopainnogain.userservice.web.controller;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import nopainnogain.userservice.core.dto.user.*;
 import nopainnogain.userservice.service.impl.JwtService;
-import nopainnogain.userservice.core.dto.user.LoginDto;
-import nopainnogain.userservice.core.dto.user.SaveUserDto;
-import nopainnogain.userservice.core.dto.user.UserRegistrationDto;
 import nopainnogain.userservice.service.api.IRegistrationUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("/users")
 public class RegistrationController {
 
     private final IRegistrationUserService service;
@@ -24,18 +24,19 @@ public class RegistrationController {
     }
 
     @PostMapping(path = "/registration")
-    public void registration(@RequestBody @Validated UserRegistrationDto userRegistrationDTO) {
+    public void registration(@RequestBody @Validated RegistrationDto userRegistrationDTO) {
         service.registrationUser(userRegistrationDTO);
     }
 
     @GetMapping(path = "/verification")
-    public void verification(String code, String email) {
+    public void verification(@RequestParam("code") @NotEmpty String code,
+                             @RequestParam("email") @NotEmpty @Email String email) {
         service.verification(code, email);
     }
 
     @PostMapping(path = "/login")
     public ResponseEntity<String> login(@RequestBody @Validated LoginDto loginDTO) {
-        var login = service.login(loginDTO);
+        DetailsDto login = service.login(loginDTO);
         Map<String, Object> claim = jwtService.getClaim(login);
         return ResponseEntity.ok(jwtService.generationToken(claim, login));
     }

@@ -26,19 +26,17 @@ public class SecurityConfig {
                 .disable()
                 .authorizeHttpRequests((auth) ->
                         auth
-                                .requestMatchers(HttpMethod.GET, "/api/v1/product").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/api/v1/product").hasAnyAuthority("ADMIN", "USER")
-                                .requestMatchers("/api/v1/product/**").hasAnyAuthority("ADMIN", "USER")
-                                .requestMatchers("/api/v1/recipe").hasAnyAuthority("ADMIN", "USER")
-                                .requestMatchers("/api/v1/recipe/**").hasAnyAuthority("ADMIN", "USER")
+                                .requestMatchers(HttpMethod.GET, "/product").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/product").hasAnyAuthority("ADMIN", "USER")
+                                .requestMatchers("/product/**").hasAnyAuthority("ADMIN", "USER")
+                                .requestMatchers("/recipe").hasAnyAuthority("ADMIN", "USER")
+                                .requestMatchers("/recipe/**").hasAnyAuthority("ADMIN", "USER")
                                 .anyRequest()
                                 .authenticated()
                 )
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-//                .authenticationProvider(authenticationProvider)
-//                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

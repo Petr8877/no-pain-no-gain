@@ -3,6 +3,7 @@ package nopainnogain.productservice.configuration;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import nopainnogain.productservice.core.exception.SingleErrorResponse;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -38,17 +39,16 @@ public class JwtService {
             Jwts.parserBuilder().setSigningKey(getSingInKey()).build().parseClaimsJws(token);
             return true;
         } catch (SecurityException ex) {
-            //logger.error("Invalid JWT signature - {}", ex.getMessage());
+            throw new SingleErrorResponse("Invalid JWT signature - " + ex.getMessage());
         } catch (MalformedJwtException ex) {
-            //logger.error("Invalid JWT token - {}", ex.getMessage());
+            throw new SingleErrorResponse("Invalid JWT token - " + ex.getMessage());
         } catch (ExpiredJwtException ex) {
-            //logger.error("Expired JWT token - {}", ex.getMessage());
+            throw new SingleErrorResponse("Expired JWT token - " + ex.getMessage());
         } catch (UnsupportedJwtException ex) {
-            //logger.error("Unsupported JWT token - {}", ex.getMessage());
+            throw new SingleErrorResponse("Unsupported JWT token - " + ex.getMessage());
         } catch (IllegalArgumentException ex) {
-            //logger.error("JWT claims string is empty - {}", ex.getMessage());
+            throw new SingleErrorResponse("JWT claims string is empty - " + ex.getMessage());
         }
-        return false;
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -56,7 +56,7 @@ public class JwtService {
         return claimsResolver.apply(claims);
     }
 
-    private Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(getSingInKey())
                 .build()

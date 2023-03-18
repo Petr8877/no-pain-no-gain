@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/product")
+@RequestMapping("/product")
 public class ProductController {
 
     private final IProductService service;
@@ -28,7 +28,8 @@ public class ProductController {
     }
 
     @PutMapping(path = "/{uuid}/dt_update/{dt_update}")
-    public void updateProduct(@PathVariable("uuid") UUID uuid, @PathVariable("dt_update") LocalDateTime dtUpdate,
+    public void updateProduct(@PathVariable("uuid") UUID uuid,
+                              @PathVariable("dt_update") LocalDateTime dtUpdate,
                               @RequestBody @Validated ProductDto productDTO) {
         service.updateProduct(uuid, dtUpdate, productDTO);
     }

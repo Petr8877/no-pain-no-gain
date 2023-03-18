@@ -3,7 +3,6 @@ package nopainnogain.userservice.core.exception;
 public class SingleErrorResponse extends RuntimeException {
 
     private String logref;
-
     private String message;
 
     public SingleErrorResponse(String message) {

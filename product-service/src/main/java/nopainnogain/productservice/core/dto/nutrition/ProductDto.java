@@ -8,19 +8,14 @@ public class ProductDto {
 
     @NotEmpty
     private final String title;
-
     @Positive
     private final int weight;
-
     @PositiveOrZero
     private final int calories;
-
     @PositiveOrZero
     private final double proteins;
-
     @PositiveOrZero
     private final double fats;
-
     @PositiveOrZero
     private final double carbohydrates;
 

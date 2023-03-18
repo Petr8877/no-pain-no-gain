@@ -3,13 +3,10 @@ package nopainnogain.mailservice.web.controller;
 import nopainnogain.mailservice.core.dto.MailDto;
 import nopainnogain.mailservice.service.EmailServiceImpl;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/mail")
+@RequestMapping("/mail")
 public class MailController {
 
     private final EmailServiceImpl service;
