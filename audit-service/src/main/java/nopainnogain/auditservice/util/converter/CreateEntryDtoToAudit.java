@@ -17,15 +17,18 @@ public class CreateEntryDtoToAudit implements Converter<CreateEntryDto, Audit> {
     public Audit convert(CreateEntryDto source) {
         UUID uuid = UUID.randomUUID();
         LocalDateTime time = LocalDateTime.now();
-        User user = new User(source.uuid(), source.email(), source.fio(), source.role());
+//        User user = new User(source.uuid(), source.email(), source.fio(), source.role());
         TypeOfEntity typeOfEntity = getTypeOfEntityById(source.id());
 
         return new Audit(uuid,
                          time,
-                         user,
                          source.text(),
                          typeOfEntity,
-                         source.id());
+                         source.id(),
+                         source.uuid(),
+                         source.email(),
+                         source.fio(),
+                         source.role());
     }
 
     private TypeOfEntity getTypeOfEntityById(int id) {

@@ -27,8 +27,11 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) ->
                         auth
                                 .requestMatchers(HttpMethod.POST, "/audit/secretlink").permitAll()
-                                .requestMatchers(HttpMethod.GET, "/audit").hasAuthority("ADMIN")
-                                .requestMatchers("/audit/**").hasAuthority("ADMIN")
+//                                .requestMatchers(HttpMethod.GET, "/audit").hasAuthority("ADMIN")
+//                                .requestMatchers("/audit/**").hasAuthority("ADMIN")
+                                .requestMatchers("/audit").permitAll()
+                                .requestMatchers("/audit/**").permitAll()
+                                .requestMatchers("/audit/toreport/**").permitAll()
                                 .anyRequest()
                                 .authenticated()
                 )

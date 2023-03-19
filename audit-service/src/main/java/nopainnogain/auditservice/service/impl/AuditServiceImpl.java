@@ -11,6 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 @Service
@@ -46,6 +48,19 @@ public class AuditServiceImpl implements AuditService {
                 -> new SingleErrorResponse("Audit not found"));
         toAudit("Просмотр сведений аудита по id: " + id);
         return conversionService.convert(audit, AuditDto.class);
+    }
+
+    @Override
+    public List<ToReportDto> getReportInfo(UUID id, LocalDate dateTo, LocalDate dateFrom) {
+        LocalDateTime dateTime = dateFrom.atTime(00,00,00,000);
+        LocalDateTime from = dateFrom.atStartOfDay();
+        LocalDateTime to = dateTo.atStartOfDay();
+        List<Audit> allAudit = repository.findAllUser(id, from, to);
+        List<ToReportDto> reportDtos = new ArrayList<>();
+        for (Audit audit : allAudit) {
+            reportDtos.add(conversionService.convert(audit, ToReportDto.class));
+        }
+        return reportDtos;
     }
 
     private void toAudit(String text) {

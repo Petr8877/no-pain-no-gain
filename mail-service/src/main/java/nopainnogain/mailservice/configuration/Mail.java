@@ -16,8 +16,8 @@ public class Mail {
         mailSender.setHost("smtp.mail.ru");
         mailSender.setPort(465);
 
-        mailSender.setUsername("ivanivanov2023_18@mail.ru");
-        mailSender.setPassword("CzgX7LYBBE0GfaQPrZL6");
+        mailSender.setUsername("user_user2024@mail.ru");
+        mailSender.setPassword("YYb85EnsUfAaEyfEvSNh");
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtps");
@@ -36,3 +36,4 @@ public class Mail {
         return message;
     }
 }
+//YYb85EnsUfAaEyfEvSNh

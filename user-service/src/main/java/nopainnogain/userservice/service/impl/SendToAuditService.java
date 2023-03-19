@@ -12,7 +12,8 @@ import java.util.UUID;
 
 public class SendToAuditService {
 
-    private static final String URL = "http://audit-service:8080/api/v1/audit/secretlink";
+//    private static final String URL = "http://audit-service:8080/api/v1/audit/secretlink";
+    private static final String URL = "http://localhost:8080/audit/secretlink";
 
     public static void sendAudit(UUID uuid, String email, String fio, Role role, String text) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
