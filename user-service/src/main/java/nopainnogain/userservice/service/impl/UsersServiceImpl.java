@@ -13,6 +13,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -24,11 +25,13 @@ import java.util.*;
 public class UsersServiceImpl implements IUsersService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder encoder;
 
     private final ConversionService conversionService;
 
-    public UsersServiceImpl(UserRepository userRepository, ConversionService conversionService) {
+    public UsersServiceImpl(UserRepository userRepository, PasswordEncoder encoder, ConversionService conversionService) {
         this.userRepository = userRepository;
+        this.encoder = encoder;
         this.conversionService = conversionService;
     }
 
@@ -60,7 +63,7 @@ public class UsersServiceImpl implements IUsersService {
             entity.setFio(userDTO.fio());
             entity.setRole(userDTO.role());
             entity.setStatus(userDTO.status());
-            entity.setPassword(userDTO.password());
+            entity.setPassword(encoder.encode(userDTO.password()));
             toAudit("Корректировка информации о пользователе uuid: " + entity.getUuid());
             return userRepository.save(entity);
         } else {

@@ -1,11 +1,10 @@
 package nopainnogain.auditservice.entity;
 
 import jakarta.persistence.*;
+import nopainnogain.auditservice.core.enums.Role;
 import nopainnogain.auditservice.core.enums.TypeOfEntity;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -16,24 +15,29 @@ public class Audit {
     @Id
     private UUID uuid;
     private LocalDateTime dtCreate;
-    @ElementCollection
-    @CollectionTable(schema = "app", name = "audit_user", joinColumns = @JoinColumn(name = "user_id"))
-    private List<User> user;
-    private String test;
+    private String text;
     @Enumerated(value = EnumType.STRING)
     private TypeOfEntity type;
-    private int id;
+    private int idType;
+    private UUID client;
+    private String clientEmail;
+    private String clientFio;
+    @Enumerated(value = EnumType.STRING)
+    private Role clientRole;
 
-    public Audit() {
-    }
-
-    public Audit(UUID uuid, LocalDateTime dtCreate, User user, String test, TypeOfEntity type, int id) {
+    public Audit(UUID uuid, LocalDateTime dtCreate, String text, TypeOfEntity type, int idType, UUID client, String clientEmail, String clientFio, Role clientRole) {
         this.uuid = uuid;
         this.dtCreate = dtCreate;
-        this.user = Collections.singletonList(user);
-        this.test = test;
+        this.text = text;
         this.type = type;
-        this.id = id;
+        this.idType = idType;
+        this.client = client;
+        this.clientEmail = clientEmail;
+        this.clientFio = clientFio;
+        this.clientRole = clientRole;
+    }
+
+    public Audit() {
     }
 
     public UUID getUuid() {
@@ -52,20 +56,12 @@ public class Audit {
         this.dtCreate = dtCreate;
     }
 
-    public List<User> getUser() {
-        return user;
+    public String getText() {
+        return text;
     }
 
-    public void setUser(List<User> user) {
-        this.user = user;
-    }
-
-    public String getTest() {
-        return test;
-    }
-
-    public void setTest(String test) {
-        this.test = test;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public TypeOfEntity getType() {
@@ -76,11 +72,43 @@ public class Audit {
         this.type = type;
     }
 
-    public int getId() {
-        return id;
+    public int getIdType() {
+        return idType;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdType(int idType) {
+        this.idType = idType;
+    }
+
+    public UUID getClient() {
+        return client;
+    }
+
+    public void setClient(UUID client) {
+        this.client = client;
+    }
+
+    public String getClientEmail() {
+        return clientEmail;
+    }
+
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
+    }
+
+    public String getClientFio() {
+        return clientFio;
+    }
+
+    public void setClientFio(String clientFio) {
+        this.clientFio = clientFio;
+    }
+
+    public Role getClientRole() {
+        return clientRole;
+    }
+
+    public void setClientRole(Role clientRole) {
+        this.clientRole = clientRole;
     }
 }

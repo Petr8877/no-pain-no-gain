@@ -4,9 +4,9 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://db:5432/root
-#    url: jdbc:postgresql://localhost:5434/fitness
     username: root
     password: root
+#    url: jdbc:postgresql://localhost:5434/fitness
 #    username: postgres
 #    password: kasper
   jackson:

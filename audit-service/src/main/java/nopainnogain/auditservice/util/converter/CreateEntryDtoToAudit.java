@@ -4,7 +4,6 @@ import nopainnogain.auditservice.core.dto.CreateEntryDto;
 import nopainnogain.auditservice.core.enums.TypeOfEntity;
 import nopainnogain.auditservice.core.exception.SingleErrorResponse;
 import nopainnogain.auditservice.entity.Audit;
-import nopainnogain.auditservice.entity.User;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -17,15 +16,17 @@ public class CreateEntryDtoToAudit implements Converter<CreateEntryDto, Audit> {
     public Audit convert(CreateEntryDto source) {
         UUID uuid = UUID.randomUUID();
         LocalDateTime time = LocalDateTime.now();
-        User user = new User(source.uuid(), source.email(), source.fio(), source.role());
         TypeOfEntity typeOfEntity = getTypeOfEntityById(source.id());
 
         return new Audit(uuid,
                          time,
-                         user,
                          source.text(),
                          typeOfEntity,
-                         source.id());
+                         source.id(),
+                         source.uuid(),
+                         source.email(),
+                         source.fio(),
+                         source.role());
     }
 
     private TypeOfEntity getTypeOfEntityById(int id) {

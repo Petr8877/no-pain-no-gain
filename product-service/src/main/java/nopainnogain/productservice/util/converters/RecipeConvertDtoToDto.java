@@ -5,6 +5,8 @@ import nopainnogain.productservice.core.dto.nutrition.SaveRecipeDto;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -19,8 +21,8 @@ public class RecipeConvertDtoToDto implements Converter<RecipeConvertDto, SaveRe
                                  source.ingredient(),
                                  source.recipeCPFCDto().weight(),
                                  source.recipeCPFCDto().calories(),
-                                 source.recipeCPFCDto().proteins(),
-                                 source.recipeCPFCDto().fats(),
-                                 source.recipeCPFCDto().carbohydrates());
+                                 BigDecimal.valueOf(source.recipeCPFCDto().proteins()).setScale(2, RoundingMode.FLOOR),
+                                 BigDecimal.valueOf(source.recipeCPFCDto().fats()).setScale(2, RoundingMode.FLOOR),
+                                 BigDecimal.valueOf(source.recipeCPFCDto().carbohydrates()).setScale(2, RoundingMode.FLOOR));
     }
 }
